@@ -29,7 +29,10 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{% url  'notes:logout' %}" class="nav-link">Log Out</a>
+                        <form action="{% url 'notes:logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm nav-link">Log Out</button>
+                        </form>
                     </li>
                 {% else %}
                     <li class="nav-item">
