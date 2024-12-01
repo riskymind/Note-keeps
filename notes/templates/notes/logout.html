@@ -3,11 +3,11 @@
 {% block title %} Bye Bye!!{% endblock %}
 
 {% block content %}
-    <section>
+    <section class="container py-5 mt-5 text-center">
         <div>
             <div>
-                <h1>You Have Logged out.</h1>
-                <p>Thank you for spending time with us.</p>
+                <h1 class="fw-light">You Have Logged out.</h1>
+                <p class="lead text-muted">Thank you for spending time with us.</p>
                 <p>
                     <a href="{% url 'notes:login' %}" class="btn btn-secondary my-4">Login</a>
                 </p>

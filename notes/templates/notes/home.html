@@ -1,7 +1,49 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %} Home {% endblock %}
 
 {% block content %}
-    This is the home page
+
+    <div class="container">
+        {% if notes %}
+            {% for note in notes %}
+                <div class="note my-4">
+                    <h2 class="text-info">{{ note.title | title}}</h2>
+                    <p>{{ note.description }}</p>
+                    <div class="options">
+                        <a href="{% url 'notes:update' note.id %}" class="btn btn-secondary">Update</a>
+                        <a href="{% url 'notes:delete' note.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <section class="container py-5 mt-5 text-center">
+                <div>
+                    <div>
+                        <h1 class="fw-light">You Don't have any Note.</h1>
+                        <p class="lead text-muted">Thank you for spending time with us.</p>
+                        <p>
+                            <a href="#" class="btn btn-secondary my-4 add">+ Add Note</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+    </div>
+    
+    <div class="add-modal" id="add-modal">
+        <div class="form">
+            <form action="" method="post">
+                {% csrf_token %}
+                <h3>Add Note</h3>
+            {{form | crispy}}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-danger close-btn" onclick="closeModal('add-modal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 {% endblock %}
